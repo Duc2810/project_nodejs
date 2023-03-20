@@ -1,5 +1,16 @@
+
+import connection from "../configs/connectDB";
+
 let getHomePage = (req, res) => {
-    return res.render("index.ejs")
+    let data = [];
+    // simple query
+    connection.query(
+        'SELECT * FROM `users`',
+        function (err, results, fields) {
+            data = results.map((row) => { return row });
+            return res.render("index.ejs", { dataUser: data, })
+        });
+
 }
 
 
